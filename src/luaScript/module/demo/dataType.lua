@@ -51,16 +51,50 @@ local function _tableOperator()
     table.remove(array1);
     basic.printTable(array1);
     --删除第二个元素
-    table.remove(array1,2);
+    table.remove(array1, 2);
     basic.printTable(array1);
+end
 
+
+--演示for操作
+local function _forOperator()
+    -- foreach循环，打印table t中所有的键和值
+    local days2 = {
+        Sunday = 1,
+        Monday = 2,
+        Tuesday = 3,
+        Wednesday = 4,
+        Thursday = 5,
+        Friday = 6,
+        Saturday = 7
+    }
+    for key, value in pairs(days2) do
+        ngx.say(key .. ":" .. value);
+    end
+end
+
+-- 正方形类
+local _Square = { side = 0}
+_Square.__index = _Square
+-- 类的方法getArea
+function _Square.getArea(self)
+    return self.side * self.side;
+end
+-- 类的方法new
+function _Square.new(self,side)
+    local cls = {}
+    setmetatable(cls,self)
+    cls.side = side or 0
+    return cls
 end
 
 -- 统一的模块对象
 local _Module = {
-    showDataType = _showDataType,
-    intPart = _intPart,
-    stringOperator = _stringOperator,
-    tableOperator = _tableOperator,
+    showDataType = _showDataType;
+    intPart = _intPart;
+    stringOperator = _stringOperator;
+    tableOperator = _tableOperator;
+    forOperator = _forOperator;
+    Square = _Square;
 }
 return _Module

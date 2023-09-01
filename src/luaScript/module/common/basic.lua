@@ -28,13 +28,14 @@ local function log_screen(...)
 end
 
 --在屏幕上输出table元素
-local function _printTable(tab)
-    local output = ""
-    for i, v in ipairs(tab) do
+local function _printTable(tab)    
+    for i, v in pairs(tab) do
         ngx.say(v .. "  ");
     end
     ngx.say("<br>")
 end
+
+
 
 --统一的模块对象
 local _Module = {

@@ -12,3 +12,11 @@ dataType.stringOperator();
 
 ngx.say("<hr>");
 dataType.tableOperator();
+
+ngx.say("<hr>");
+dataType.forOperator();
+
+ngx.say("<br><hr>下面是面向对象操作的演示：<br>");
+local Square = dataType.Square;
+local square = Square:new(20);
+ngx.say("正方形的面积为",square:getArea());
