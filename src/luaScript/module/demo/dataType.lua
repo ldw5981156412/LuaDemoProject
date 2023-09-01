@@ -19,9 +19,23 @@ local function _intPart(number)
     basic.log_screen("向上取整是", math.ceil(number));
 end
 
+local function _stringOperator()
+    local here = "这里是" .. "中国" .. "北京";
+    print(here);
+    basic.log_screen("字符串拼接演示", here);
+
+    basic.log_screen("获取字符串的长度", string.len(here));
+    basic.log_screen("获取字符串的长度", #here);
+
+    basic.log_screen("字符串查找", string.find(here, "北京"));
+    basic.log_screen("字符串转成大写", string.upper("Hello World"));
+    basic.log_screen("字符串转成小写", string.lower("Hello World"));
+end
+
 --统一的模块对象
 local _Module = {
     showDataType = _showDataType;
     intPart = _intPart;
+    stringOperator = _stringOperator;
 }
 return _Module
