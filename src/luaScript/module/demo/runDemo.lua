@@ -6,5 +6,9 @@ dataType.showDataType();
 ngx.say("<hr>下面是数字取整的输出：<br>" );
 dataType.intPart(0.01);
 dataType.intPart(3.14);
+
 ngx.say("<hr>");
 dataType.stringOperator();
+
+ngx.say("<hr>");
+dataType.tableOperator();

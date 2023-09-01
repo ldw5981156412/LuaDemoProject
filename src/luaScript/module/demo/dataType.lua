@@ -1,5 +1,6 @@
---导入自定义的模块
+-- 导入自定义的模块
 local basic = require("luaScript.module.common.basic");
+local table = table or require "table"
 
 local function _showDataType()
     local i;
@@ -12,7 +13,7 @@ local function _showDataType()
     basic.log_screen("未赋值变量i的类型", type(i));
 end
 
---演示取整操作
+-- 演示取整操作
 local function _intPart(number)
     basic.log_screen("演示的整数", number);
     basic.log_screen("向下取整是", math.floor(number));
@@ -32,10 +33,34 @@ local function _stringOperator()
     basic.log_screen("字符串转成小写", string.lower("Hello World"));
 end
 
---统一的模块对象
+local function _tableOperator()
+    local array1 = { "这里是：", "北京", "朝阳" }
+    local array2 = { k1 = "这里是：", k2 = "河南", k3 = "郑州" }
+    basic.log_screen("table.getn(t)获取长度", table.getn(array1));
+    basic.log_screen("一元操作符#", #array1);
+
+    basic.log_screen("连接元素", table.concat(array1));
+    basic.log_screen("带分隔符连接元素", table.concat(array1, "*"));
+
+    table.insert(array1, "望京");
+    basic.printTable(array1);
+    table.insert(array1, 2, "望京");
+    basic.printTable(array1);
+
+    --删除最后一个元素
+    table.remove(array1);
+    basic.printTable(array1);
+    --删除第二个元素
+    table.remove(array1,2);
+    basic.printTable(array1);
+
+end
+
+-- 统一的模块对象
 local _Module = {
-    showDataType = _showDataType;
-    intPart = _intPart;
-    stringOperator = _stringOperator;
+    showDataType = _showDataType,
+    intPart = _intPart,
+    stringOperator = _stringOperator,
+    tableOperator = _tableOperator,
 }
 return _Module
