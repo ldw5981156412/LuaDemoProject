@@ -35,6 +35,49 @@ local function _printTable(tab)
     ngx.say("<br>")
 end
 
+local function toStringEx(value)
+    if type(value)=='table' then
+        return tableToStr(value)
+    elseif type(value)=='string' then
+        return "\'"..value.."\'"
+    else
+        return tostring(value)
+    end
+end
+
+local function tableToStr(t, split)
+    if t == nil then
+        return ""
+    end
+    if split == nil then
+        split = ",";
+    end
+
+    local retstr = "{"
+
+    local i = 1
+    for key, value in pairs(t) do
+
+        if key == i then
+            retstr = retstr  .. toStringEx(value) .. split
+        else
+            if type(key) == 'number' or type(key) == 'string' then
+                retstr = retstr .. '[' .. toStringEx(key) .. "]=" .. toStringEx(value) .. split
+            else
+                if type(key) == 'userdata' then
+                    retstr = retstr  .. "*s" .. tableToStr(getmetatable(key)) .. "*e" .. "=" .. toStringEx(value) .. split
+                else
+                    retstr = retstr .. key .. "=" .. toStringEx(value) .. split
+                end
+            end
+        end
+
+        i = i + 1
+    end
+
+    retstr = retstr .. "}"
+    return retstr
+end
 
 
 --统一的模块对象
@@ -43,5 +86,6 @@ local _Module = {
     max = max;
     log_screen = log_screen;
     printTable = _printTable;
+    tableToStr = tableToStr;
 }
 return _Module
