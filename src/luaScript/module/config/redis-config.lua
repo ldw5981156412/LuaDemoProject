@@ -3,7 +3,7 @@
 -- 统一的模块对象
 local _Module = {
     -- redis 服务器的地址
-    host_name = "172.26.9.107";
+    host_name = "192.168.56.121";
     -- redis 服务器的端口
     port = "6379";
     -- redis 服务器的数据库
