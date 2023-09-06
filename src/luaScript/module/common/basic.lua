@@ -79,6 +79,32 @@ local function tableToStr(t, split)
     return retstr
 end
 
+--输出到日志文件
+local function log(string)
+    if  type(string)=="string" then
+        ngx.log(ngx.DEBUG, string);
+        return
+    end
+
+    if  type(string)=="table" then
+        ngx.log(ngx.DEBUG, table.concat(string," "));
+        return
+    end
+    ngx.log(ngx.DEBUG, tostring(string));
+end
+--输出到日志文件
+local function error(string)
+    if  type(string)=="string" then
+        ngx.log(ngx.ERR, string);
+        return
+    end
+    if  type(string)=="table" then
+        ngx.log(ngx.ERR, table.concat(string," "));
+        return
+    end
+
+    ngx.log(ngx.ERR, tostring(string));
+end
 
 --统一的模块对象
 local _Module = {
@@ -87,5 +113,7 @@ local _Module = {
     log_screen = log_screen;
     printTable = _printTable;
     tableToStr = tableToStr;
+    log = log;
+    error = error;
 }
 return _Module
